@@ -1,0 +1,84 @@
+.mainFormCodeDiv {
+    margin: 40px 0px;
+    display: grid;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+        color: grey;
+    }
+
+    label {
+        font-size: 18px;
+        color: black;
+    }
+
+    .formField {
+        height: 35px;
+        outline: none;
+        border: 1px solid gray;
+        border-radius: 0.375rem;
+        font-size: 12px;
+        appearance: none;
+        background-repeat: no-repeat;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .selectFeild {
+        cursor: pointer;
+        padding: 6px 10px;
+        option {
+            padding: 8px;
+            cursor: pointer;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 14px;
+        
+            &:hover {
+              background-color: gray;
+            }
+          }        
+
+    }
+    .defaultIcon{
+        background-image: url('../../assest/emptyArrow.png');
+        background-size: 12px;
+        background-position: calc(100% - 12px) center;
+      }
+      
+    .inputField {
+        padding-left: 10px;
+    }
+
+    .formArea {
+        display: grid;
+
+    }
+    .error {
+        font-size: 12px;
+        color: red;
+        min-height: 20px;
+    }
+    .btnDiv{
+        display: flex;
+        justify-content: end;
+        gap: 20px;
+        button {
+            width: 100px;
+            height: 30px;
+            background-color: aqua;
+            cursor: pointer;
+        }
+    }
+
+}
+
+.mainGetCodeDiv {
+    margin: 40px 0px;
+    display: grid;
+    gap: 10px;
+    justify-content: center;
+    // align-items: center;   
+}

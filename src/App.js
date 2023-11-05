@@ -1,24 +1,17 @@
-import logo from './logo.svg';
+import { Toaster } from 'react-hot-toast';
 import './App.css';
-
+import { Suspense, lazy } from 'react';
+const Navbar  =lazy(() => import("./Components/Navbar/Navbar"));
+const LocationInfo =lazy(() => import("./Components/LocationInfo/LocationInfo"));
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Suspense fallback="Loading">
+      <Toaster position="top-right" reverseOrder={false} />
+    <Navbar/>
+    <LocationInfo/>
+    </Suspense>
+    </>
   );
 }
 
