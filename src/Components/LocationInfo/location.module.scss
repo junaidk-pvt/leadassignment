@@ -8,14 +8,19 @@ form{
         display: flex;
         flex-wrap: wrap;
         border: 1px solid;
+        border-radius: 10px;
         gap: 20px;
         justify-content: center;
         align-items: start;
+        @media screen and (max-width: 768px) {
+            
+            padding: 20px 10px 25px 10px;
+          }
     
         h2 {
             color: grey;
             @media screen and (max-width: 768px) {
-                font-size: 20px;
+                font-size: 18px;
               }
         }
     
@@ -74,23 +79,48 @@ form{
         }
         .btnDiv{
             display: flex;
-            justify-content: end;
+            align-items: center;
+            @media screen and (max-width: 768px) {
+            flex-direction: row-reverse;
+              }
             gap: 20px;
             button {
+                border: 1px solid black;
+                border-radius: 20px;
                 width: 100px;
                 height: 30px;
-                background-color: aqua;
                 cursor: pointer;
+            }
+            .submitButton{
+                background-color: aqua;
+            }
+            .cancelButton{
+                color: aliceblue;
+                background-color: rgb(235, 62, 62);
             }
         }
     
     }
 }
 
+
 .mainGetCodeDiv {
-    margin: 40px 0px;
+    width: 50%;
+    margin: 0px 50px;
+    padding: 30px;
+    border-radius: 20px;
     display: grid;
-    gap: 10px;
     justify-content: center;
-    // align-items: center;   
+    gap: 10px;
+    border: 1px solid black;
+    @media screen and (max-width: 768px) {
+        margin: 0px 10px;
+        padding: 20px;
+        width: 80vw;
+    
+          }
+          
+    // span{
+    //     color: rgb(73, 73, 237);
+    // }
 }

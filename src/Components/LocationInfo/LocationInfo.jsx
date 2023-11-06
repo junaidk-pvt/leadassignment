@@ -123,26 +123,29 @@ const LocationInfo = () => {
             <label className={styles.error}> {errors?.postalCode?.message} </label>
           </div>
           <div className={styles.btnDiv}>
-            <button type='reset' onClick={() => {
+            <button className={styles.submitButton} type='submit'>Submit</button>
+            <button className={styles.cancelButton} type='reset' onClick={() => {
               setLocationData(null)
               setValideRegex(null)
             }}>Reset</button>
-            <button type='submit'>Submit</button>
           </div>
         </div>
       </form>
       {locationData && (
+          
         <div className={styles.mainGetCodeDiv}>
-          <h3>Location Information</h3>
-          <h4>Country: {locationData.country}</h4>
-          <h4>State: {locationData?.places[1]?.state}</h4>
+          <h2>Location Information</h2>
+          <h4>Country: <span> {locationData.country} </span></h4>
+          <h4>State: <span>{locationData?.places[1]?.state} </span></h4>
           <p> <b> City: </b>Not able to Fetch City (Not there)</p>
-
+          <p><b> Places:</b>
           {locationData?.places.map((city) => {
             return (
-              <p>Places: {city['place name']} </p>
+               <span> {city['place name']}, </span> 
             )
           })}
+          </p>
+          
         </div>
       )}
     </>

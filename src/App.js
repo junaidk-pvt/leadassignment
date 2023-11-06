@@ -1,12 +1,12 @@
 import { Toaster } from 'react-hot-toast';
-import './App.css';
 import { Suspense, lazy } from 'react';
+import Spinner from './Components/Spinner/Spinner';
 const Navbar  =lazy(() => import("./Components/Navbar/Navbar"));
 const LocationInfo =lazy(() => import("./Components/LocationInfo/LocationInfo"));
 function App() {
   return (
     <>
-    <Suspense fallback="Loading">
+    <Suspense fallback=<Spinner/>>
       <Toaster position="top-right" reverseOrder={false} />
     <Navbar/>
     <LocationInfo/>
