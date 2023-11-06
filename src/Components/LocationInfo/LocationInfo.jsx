@@ -12,13 +12,13 @@ axios.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error?.response?.status === 401) {
-      
+
     } else if (error?.response?.status === 403) {
       console.log(error?.response?.data);
     } else if (error?.response?.status === 404) {
       toast("❌ Data Not Found");
     } else if (error?.response?.status === 400) {
-      
+
     } else {
       alert(error?.message || "Network Error");
     }
@@ -33,6 +33,8 @@ const LocationInfo = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
+    clearErrors
   } = useForm({
     defaultValues: {
       postalCode: "",
@@ -40,14 +42,22 @@ const LocationInfo = () => {
     mode: "all",
   }
   )
-  
+  console.log('errors', errors)
   const handleCountry = useCallback((e) => {
     setValideRegex(PincodeRegex(e.target.value))
   }, [validRegex])
-  
-  
+  // const handlePostalCode = () => {
+  //   if (!validRegex) {
+  //     setError('postalCode', { type: "required", message: "First Select Country" }, { mode: "all" });
+  //   } else {
+  //     clearErrors('postalCode');
+  //   }
+  // }
+
   const onSubmit = async (data) => {
+
     try {
+
       setLoader(true)
       const response = await axios.get(`https://api.zippopotam.us/${data?.country}/${data?.postalCode}`);
       console.log('response', response)
@@ -62,7 +72,7 @@ const LocationInfo = () => {
       setLoader(false)
     }
   }
-  
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete='false'>
@@ -70,18 +80,16 @@ const LocationInfo = () => {
         <div className={styles.mainFormCodeDiv}>
 
           <h2>Postal Code Location Information</h2>
-          <label>Enter Postal Code: </label>
           <div className={styles.formArea}>
             <select
               name="country"
               className={`${styles.formField} ${styles.selectFeild} ${styles.defaultIcon}`}
-              placeholder="Select Country"
               {...register("country", {
                 required: "Country is required.",
               })}
               onChange={(e) => { handleCountry(e) }}
             >
-              <option value=""> Select Country</option>
+              <option value=""> Select Country *</option>
               {countries.map((options) => {
                 return (
                   <option key={options.value} value={options.value}> {options?.label}</option>
@@ -93,27 +101,32 @@ const LocationInfo = () => {
 
           <div className={styles.formArea}>
             <input
-              disabled={!validRegex}
+              // disabled={!validRegex}
               className={`${styles.formField} ${styles.inputField}`}
               type="text"
               name="postalCode"
-              // value={postalCode}
-              placeholder='Enter Postal Code'
-              required
+              placeholder='Enter Postal Code *'
               {...register("postalCode", {
                 required: "PostalCode is required.",
+                validate: (val, formVal) => {
+                  return (
+                    !formVal?.country ? "First Select Country" : true
+                  );
+                },
                 pattern: {
                   value: validRegex,
                   message: "Invalid PostalCode format",
                 },
               })}
             />
+
             <label className={styles.error}> {errors?.postalCode?.message} </label>
           </div>
           <div className={styles.btnDiv}>
-            <button type='reset' onClick={()=>{
-              setLocationData(null) 
-              setValideRegex(null)}}>Reset</button>
+            <button type='reset' onClick={() => {
+              setLocationData(null)
+              setValideRegex(null)
+            }}>Reset</button>
             <button type='submit'>Submit</button>
           </div>
         </div>
@@ -124,9 +137,9 @@ const LocationInfo = () => {
           <h4>Country: {locationData.country}</h4>
           <h4>State: {locationData?.places[1]?.state}</h4>
           <p> <b> City: </b>Not able to Fetch City (Not there)</p>
-          
-          {locationData?.places.map((city)=>{
-            return(
+
+          {locationData?.places.map((city) => {
+            return (
               <p>Places: {city['place name']} </p>
             )
           })}
