@@ -111,7 +111,9 @@ const LocationInfo = () => {
             <label className={styles.error}> {errors?.postalCode?.message} </label>
           </div>
           <div className={styles.btnDiv}>
-            <button type='reset' onClick={()=>{setLocationData(null)}}>Reset</button>
+            <button type='reset' onClick={()=>{
+              setLocationData(null) 
+              setValideRegex(null)}}>Reset</button>
             <button type='submit'>Submit</button>
           </div>
         </div>
