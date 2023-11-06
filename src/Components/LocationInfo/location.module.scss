@@ -14,6 +14,9 @@ form{
     
         h2 {
             color: grey;
+            @media screen and (max-width: 375px) {
+                font-size: 18px;
+              }
         }
     
         label {
